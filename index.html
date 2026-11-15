@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>ქართული · גאורגית עם יסמין</title>
+<meta name="theme-color" content="#7c3aed">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="גאורגית">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;700;900&family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+:root{--p:#7c3aed;--pink:#ec4899;--or:#f97316;--ye:#facc15;--gr:#22c55e;--bl:#3b82f6;--cy:#06b6d4;--red:#ef4444;--ink:#1e1b4b;--card:#ffffffee}
+html,body{height:100%}
+body{font-family:Rubik,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);
+ background:linear-gradient(160deg,#fde68a 0%,#fbcfe8 35%,#c4b5fd 70%,#a5f3fc 100%);background-attachment:fixed;
+ overflow:hidden;user-select:none;-webkit-user-select:none}
+.ka{font-family:"Noto Sans Georgian","BPG Arial","Sylfaen","DejaVu Sans",system-ui,sans-serif;direction:ltr;unicode-bidi:isolate}
+button{font-family:inherit;border:none;cursor:pointer;color:inherit;outline:none}
+button:focus{outline:none}
+#app{height:100%;display:flex;flex-direction:column;max-width:720px;margin:0 auto;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;align-items:center;gap:8px;padding:10px 14px}
+#backBtn{width:44px;height:44px;border-radius:14px;background:#fff;font-size:22px;box-shadow:0 3px 0 #0002;visibility:hidden}
+#hTitle{flex:1;font-weight:800;font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{background:#fff;border-radius:999px;padding:6px 12px;font-weight:800;box-shadow:0 3px 0 #0002;font-size:15px;white-space:nowrap}
+main{flex:1;overflow-y:auto;overflow-x:hidden;padding:4px 14px 24px;-webkit-overflow-scrolling:touch}
+.screen{display:none;animation:pop .35s ease}
+.screen.on{display:block}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+/* home */
+.hero{background:linear-gradient(135deg,#7c3aed,#ec4899);color:#fff;border-radius:26px;padding:18px;position:relative;overflow:hidden;box-shadow:0 6px 0 #5b21b6}
+.hero h1{font-size:26px;font-weight:800}
+.hero .ka{font-size:22px;opacity:.95;margin-top:2px;display:inline-block}
+.hero .flag{position:absolute;left:14px;top:12px;font-size:44px;animation:wob 3s ease-in-out infinite}
+@keyframes wob{50%{transform:rotate(-10deg) scale(1.08)}}
+.lvl{margin-top:12px;background:#ffffff33;border-radius:12px;height:14px;overflow:hidden}
+.lvl i{display:block;height:100%;background:linear-gradient(90deg,#fde047,#fb923c);border-radius:12px;transition:width .6s}
+.lvlTxt{display:flex;justify-content:space-between;font-size:14px;margin-top:6px;font-weight:600}
+.secT{font-weight:800;font-size:18px;margin:18px 4px 10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{border-radius:22px;padding:14px 12px;color:#fff;text-align:right;position:relative;min-height:104px;box-shadow:0 5px 0 #0003;transition:transform .12s}
+.tile:active{transform:translateY(4px);box-shadow:0 1px 0 #0003}
+.tile b{font-size:17px;display:block;margin-top:4px}
+.tile small{font-size:13px;opacity:.92;display:block;margin-top:2px}
+.tile .em{font-size:34px}
+.tile .big{position:absolute;left:10px;bottom:4px;font-size:42px;opacity:.2;font-weight:900;max-width:45%;overflow:hidden}
+.g1{background:linear-gradient(135deg,#f97316,#ef4444)}.g2{background:linear-gradient(135deg,#8b5cf6,#6366f1)}
+.g3{background:linear-gradient(135deg,#06b6d4,#3b82f6)}.g4{background:linear-gradient(135deg,#22c55e,#14b8a6)}
+.g5{background:linear-gradient(135deg,#ec4899,#f43f5e)}.g6{background:linear-gradient(135deg,#eab308,#f97316)}
+.g7{background:linear-gradient(135deg,#0ea5e9,#8b5cf6)}.g8{background:linear-gradient(135deg,#10b981,#84cc16)}
+.g9{background:linear-gradient(135deg,#f43f5e,#a855f7)}.g10{background:linear-gradient(135deg,#64748b,#334155)}
+/* cards */
+.card{background:var(--card);border-radius:22px;padding:14px;box-shadow:0 4px 0 #0001,0 8px 24px #0001}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chip{background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;box-shadow:0 3px 0 #0002}
+.chip.on{background:var(--p);color:#fff}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(66px,1fr));gap:9px}
+.lt{aspect-ratio:1;border-radius:18px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 0 #0002;position:relative}
+.lt .ka{font-size:34px;font-weight:700;line-height:1.1}
+.lt small{font-size:12px;color:#6b7280;font-weight:600}
+.lt.seen::after{content:"⭐";position:absolute;top:2px;left:4px;font-size:12px}
+.lt:active{transform:scale(.94)}
+/* sheet */
+#sheet{position:fixed;inset:0;background:#1e1b4b88;display:none;align-items:flex-end;justify-content:center;z-index:30}
+#sheet.on{display:flex}
+#sheetIn{background:#fff;width:100%;max-width:720px;border-radius:28px 28px 0 0;padding:16px 16px calc(18px + env(safe-area-inset-bottom));max-height:92vh;overflow-y:auto;animation:up .3s ease}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.bigL{font-size:120px;font-weight:900;text-align:center;line-height:1.1;background:linear-gradient(135deg,#7c3aed,#ec4899,#f97316);-webkit-background-clip:text;background-clip:text;color:transparent}
+.row{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap}
+.tag{background:#f3e8ff;color:#6d28d9;border-radius:12px;padding:6px 10px;font-weight:700;font-size:15px}
+.tag.o{background:#ffedd5;color:#c2410c}.tag.g{background:#dcfce7;color:#15803d}
+.btn{background:var(--p);color:#fff;border-radius:16px;padding:12px 18px;font-weight:800;font-size:16px;box-shadow:0 4px 0 #5b21b6}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5b21b6}
+.btn.s{background:#fff;color:var(--ink);box-shadow:0 4px 0 #0002}
+.btn.gr{background:var(--gr);box-shadow:0 4px 0 #15803d}
+.say{display:none;background:#fef3c7;border-radius:12px;padding:6px 10px;font-size:18px;box-shadow:0 3px 0 #0002}
+body.tts .say{display:inline-block}
+.exw{background:linear-gradient(135deg,#fef3c7,#fce7f3);border-radius:18px;padding:12px;margin-top:12px;text-align:center}
+.exw .em{font-size:44px}
+.letters span{display:inline;padding:0;border-radius:6px;cursor:pointer;transition:background .2s}
+.letters span.hl{background:#fde047}
+.letters span:active{background:#c4b5fd}
+.trace{display:block;margin:12px auto 6px;background:#fff;border-radius:18px;border:3px dashed #c4b5fd;touch-action:none}
+.hint{font-size:13px;color:#6b7280;text-align:center}
+/* word list */
+.wl{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.wc{height:130px;perspective:600px}
+.wc .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.wc.f .in{transform:rotateY(180deg)}
+.wc .fa,.wc .ba{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;box-shadow:0 4px 0 #0002}
+.wc .fa{background:#fff}
+.wc .ba{background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;transform:rotateY(180deg)}
+.wc .fa .ka{font-size:24px;font-weight:700;white-space:nowrap}
+.wc .em{font-size:34px}
+.tr{font-size:14px;color:#6b7280;direction:ltr;unicode-bidi:isolate}
+.he{font-size:15px;font-weight:700;color:#7c3aed}
+.ba .he{color:#fff;font-size:20px}.ba .tr{color:#fff;opacity:.9}
+.sl{display:flex;flex-direction:column;gap:10px}
+.sr{background:#fff;border-radius:18px;padding:12px 14px;box-shadow:0 4px 0 #0002;text-align:right}
+.sr .ka{font-size:22px;font-weight:700;display:block;text-align:left}
+.sr .more{display:none;margin-top:6px;border-top:2px dashed #e9d5ff;padding-top:6px}
+.sr.f .more{display:block}
+/* quiz */
+.qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px}
+.prog{flex:1;height:12px;background:#fff;border-radius:10px;overflow:hidden}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#06b6d4);transition:width .4s}
+.combo{font-weight:800;color:#ea580c;min-width:52px;text-align:center}
+.qbox{background:#fff;border-radius:26px;padding:18px;text-align:center;box-shadow:0 6px 0 #0001;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.qbox .q1{font-size:96px;font-weight:900;line-height:1.1}
+.qbox .q2{font-size:40px;font-weight:800}
+.qbox .q3{font-size:30px;font-weight:700}
+.qlbl{font-size:15px;color:#6b7280;font-weight:600}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.opt{background:#fff;border-radius:20px;padding:14px 8px;min-height:76px;font-size:20px;font-weight:800;box-shadow:0 5px 0 #c4b5fd;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:transform .1s}
+.opt:active{transform:translateY(3px)}
+.opt .ka{font-size:26px}
+.opt.big .ka{font-size:46px}
+.opt.ok{background:#22c55e;color:#fff;box-shadow:0 5px 0 #15803d;animation:bounce .4s}
+.opt.no{background:#ef4444;color:#fff;box-shadow:0 5px 0 #b91c1c;animation:shake .4s}
+.opt.dim{opacity:.45}
+@keyframes bounce{40%{transform:scale(1.08)}}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.explain{min-height:28px;text-align:center;margin-top:10px;font-weight:700;color:#4c1d95}
+/* builder */
+.slots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px 0;direction:ltr}
+.slot{min-width:46px;height:56px;border-radius:14px;background:#ede9fe;border:3px dashed #a78bfa;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;padding:0 6px}
+.slot.full{background:#fff;border-style:solid;border-color:#7c3aed}
+.slot.ok{background:#22c55e;color:#fff;border-color:#15803d}
+.bank{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;direction:ltr}
+.key{min-width:52px;height:58px;border-radius:16px;background:#fff;font-size:30px;font-weight:700;box-shadow:0 5px 0 #f9a8d4;padding:0 10px}
+.key.used{visibility:hidden}
+.key:active{transform:translateY(3px)}
+.wordtile{font-size:22px;height:52px}
+/* memory */
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mc{aspect-ratio:1/1.05;perspective:600px}
+.mc .in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.mc.f .in,.mc.done .in{transform:rotateY(180deg)}
+.mc .fa,.mc .ba{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 0 #0002;text-align:center;padding:4px}
+.mc .fa{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:34px}
+.mc .ba{background:#fff;transform:rotateY(180deg);font-size:20px;font-weight:800}
+.mc .ba .ka{font-size:40px}
+.mc.done .ba{background:#bbf7d0}
+/* numbers */
+.ngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px}
+.nc{background:#fff;border-radius:18px;padding:10px 6px;text-align:center;box-shadow:0 4px 0 #0002}
+.nc .d{font-size:30px;font-weight:800;color:#7c3aed}
+.nc .ka{font-size:17px;font-weight:700}
+input[type=range]{width:100%;accent-color:#7c3aed;height:34px}
+.bigN{font-size:64px;font-weight:900;text-align:center;color:#7c3aed}
+/* end */
+.end{text-align:center}
+.end .stars{font-size:54px;letter-spacing:6px;margin:10px 0}
+.end h2{font-size:28px}
+.end .sc{font-size:44px;font-weight:900;color:#7c3aed}
+#toast{position:fixed;top:calc(70px + env(safe-area-inset-top));left:50%;transform:translateX(-50%) translateY(-20px);background:#1e1b4b;color:#fff;padding:10px 18px;border-radius:999px;font-weight:800;opacity:0;transition:.3s;z-index:50;pointer-events:none;white-space:nowrap}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:40}
+.note{background:#fff8;border-radius:16px;padding:10px 12px;font-size:14px;line-height:1.5;margin-top:12px}
+.foot{text-align:center;font-size:13px;opacity:.75;margin-top:22px}
+</style>
+</head>
+<body>
+<div id="app">
+ <header>
+  <button id="backBtn" onclick="goHome()">➜</button>
+  <div id="hTitle">ქართული 🇬🇪</div>
+  <div class="pill" id="streakPill">🔥 1</div>
+  <div class="pill" id="xpPill">⭐ 0</div>
+ </header>
+ <main id="main">
+  <!-- HOME -->
+  <section class="screen on" id="s-home">
+   <div class="hero">
+    <div class="flag">🇬🇪</div>
+    <h1>שלום יסמין! 👋</h1>
+    <span class="ka">გამარჯობა, იასმინ!</span>
+    <div class="lvl"><i id="lvlBar" style="width:0"></i></div>
+    <div class="lvlTxt"><span id="lvlName">מתחילה 🌱</span><span id="lvlNext"></span></div>
+   </div>
+   <div class="secT">📚 ללמוד</div>
+   <div class="grid2">
+    <button class="tile g1" onclick="openLetters()"><span class="em">🔤</span><b>אותיות</b><small id="seenCnt">0/33 נלמדו</small><span class="big ka">ა</span></button>
+    <button class="tile g2" onclick="openWords()"><span class="em">📖</span><b>מילים</b><small>50 מילים עם תמונות</small><span class="big ka">სიტყვა</span></button>
+    <button class="tile g3" onclick="openSentences()"><span class="em">💬</span><b>משפטים</b><small>משפטים שימושיים</small><span class="big ka">!</span></button>
+    <button class="tile g4" onclick="openNumbers()"><span class="em">🔢</span><b>מספרים</b><small>0 עד 100 ויותר</small><span class="big">123</span></button>
+   </div>
+   <div class="secT">🎮 לשחק ולתרגל</div>
+   <div class="grid2">
+    <button class="tile g5" onclick="pickGroup('letterQuiz')"><span class="em">🎯</span><b>חידון אותיות</b><small>איזה צליל? איזו אות?</small></button>
+    <button class="tile g6" onclick="pickMemory()"><span class="em">🃏</span><b>משחק זיכרון</b><small>מצאי את הזוגות</small></button>
+    <button class="tile g7" onclick="startWordQuiz()"><span class="em">👀</span><b>קריאת מילים</b><small>קראי ובחרי תמונה</small></button>
+    <button class="tile g8" onclick="startBuild()"><span class="em">🧩</span><b>בני מילה</b><small>אות אחרי אות</small></button>
+    <button class="tile g9" onclick="startSentBuild()"><span class="em">🧱</span><b>בני משפט</b><small>סדרי את המילים</small></button>
+    <button class="tile g3" onclick="startNumQuiz()"><span class="em">🧮</span><b>חידון מספרים</b><small>ספרות ומילים</small></button>
+   </div>
+   <div class="grid2" style="margin-top:12px">
+    <button class="tile g10" onclick="startMega()"><span class="em">🏆</span><b>אתגר מעורב</b><small>הכל ביחד – לאלופות</small></button>
+    <button class="tile g1" onclick="openTips()"><span class="em">💡</span><b>טיפים לקריאה</b><small>איך קוראים גאורגית</small></button>
+   </div>
+   <div class="foot">נבנה באהבה ליסמין ❤️ · <span class="ka">წარმატებები!</span></div>
+  </section>
+
+  <section class="screen" id="s-letters">
+   <div class="chips" id="lgChips"></div>
+   <div class="lgrid" id="lgrid"></div>
+   <div class="note">💡 לחצי על אות כדי לראות איך היא נשמעת, מילה לדוגמה ולתרגל כתיבה. אות שלמדת מקבלת ⭐</div>
+  </section>
+
+  <section class="screen" id="s-words">
+   <div class="chips" id="wcChips"></div>
+   <div class="wl" id="wlist"></div>
+   <div class="note">💡 לחצי על כרטיס כדי להפוך אותו. נסי לקרוא לבד לפני שהופכים!</div>
+  </section>
+
+  <section class="screen" id="s-sent">
+   <div class="sl" id="slist"></div>
+   <div class="note">💡 נסי לקרוא כל משפט בעצמך, ואז לחצי לבדוק. אפשר ללחוץ על אות כדי לשמוע איזה צליל היא.</div>
+  </section>
+
+  <section class="screen" id="s-nums">
+   <div class="card">
+    <div class="qlbl" style="text-align:center">🎚️ הזיזי ותראי איך אומרים כל מספר עד 100</div>
+    <div class="bigN" id="nxD">7</div>
+    <div style="text-align:center"><span class="ka" id="nxK" style="font-size:32px;font-weight:800"></span></div>
+    <div style="text-align:center" class="tr" id="nxT"></div>
+    <div style="text-align:center;margin-top:6px"><span class="tag o" id="nxB" dir="ltr"></span></div>
+    <input type="range" min="0" max="100" value="7" id="nxR" oninput="numExplore(+this.value)">
+    <div class="row"><button class="btn s" onclick="nStep(-1)">−1</button><button class="btn s" onclick="nStep(1)">+1</button><button class="btn s" onclick="nStep(10)">+10</button><button class="say" onclick="speak(numWord(nCur))">🔊</button></div>
+   </div>
+   <div class="note">🤓 <b>סוד קטן:</b> בגאורגית סופרים בעשרים! 40 = „שתיים פעמים עשרים" (<span class="ka">ორმოცი</span>), 30 = „עשרים ועשר" (<span class="ka">ოცდაათი</span>). המילה <span class="ka">და</span> (דה) פירושה „ו-".</div>
+   <div class="secT">כרטיסי מספרים</div>
+   <div class="ngrid" id="ngrid"></div>
+  </section>
+
+  <section class="screen" id="s-quiz"><div id="quizIn"></div></section>
+  <section class="screen" id="s-build"><div id="buildIn"></div></section>
+  <section class="screen" id="s-mem"><div id="memIn"></div></section>
+  <section class="screen" id="s-pick"><div id="pickIn"></div></section>
+  <section class="screen" id="s-tips"><div id="tipsIn"></div></section>
+ </main>
+</div>
+<div id="sheet" onclick="if(event.target===this)closeSheet()"><div id="sheetIn"></div></div>
+<div id="toast"></div>
+<canvas id="fx"></canvas>
+
+<script>
+/* ===================== DATA ===================== */
+// k=letter, n=name, h=sound in Hebrew, d=description, fam=similar-sound family, w=example word, m=meaning, e=emoji
+const LETTERS=[
+{k:'ა',n:'ანი',h:'אַ',d:'a – כמו א בפתח, „אבא"',w:'ანანასი',m:'אננס',e:'🍍'},
+{k:'ბ',n:'ბანი',h:'בּ',d:'b – כמו ב׳ ב„בית"',w:'ბანანი',m:'בננה',e:'🍌'},
+{k:'გ',n:'განი',h:'ג',d:'g – כמו ג׳ ב„גמל"',w:'გული',m:'לב',e:'❤️'},
+{k:'დ',n:'დონი',h:'ד',d:'d – כמו ד׳ ב„דג"',w:'დედა',m:'אמא',e:'👩'},
+{k:'ე',n:'ენი',h:'אֶ',d:'e – כמו א בסגול, „אֶרֶץ"',w:'ენა',m:'לשון',e:'👅'},
+{k:'ვ',n:'ვინი',h:'ו',d:'v – כמו ו׳ ב„ורד"',w:'ვაშლი',m:'תפוח',e:'🍎'},
+{k:'ზ',n:'ზენი',h:'ז',d:'z – כמו ז׳ ב„זברה"',w:'ზღვა',m:'ים',e:'🌊'},
+{k:'თ',n:'თანი',h:'ת',d:'t – ת׳ רגילה עם קצת אוויר',w:'თევზი',m:'דג',e:'🐟',fam:'t'},
+{k:'ი',n:'ინი',h:'אִי',d:'i – כמו „אִי"',w:'ირემი',m:'צבי',e:'🦌'},
+{k:'კ',n:'კანი',h:'ק (חדה)',d:`k' – ק׳ חדה ו„יבשה", בלי אוויר`,w:'კატა',m:'חתול',e:'🐈',fam:'k'},
+{k:'ლ',n:'ლასი',h:'ל',d:'l – כמו ל׳ ב„לימון"',w:'ლომი',m:'אריה',e:'🦁'},
+{k:'მ',n:'მანი',h:'מ',d:'m – כמו מ׳ ב„מים"',w:'მზე',m:'שמש',e:'☀️'},
+{k:'ნ',n:'ნარი',h:'נ',d:'n – כמו נ׳ ב„נר"',w:'ნავი',m:'סירה',e:'⛵'},
+{k:'ო',n:'ონი',h:'אוֹ',d:'o – כמו „אוֹ"',w:'ოქრო',m:'זהב',e:'🥇'},
+{k:'პ',n:'პარი',h:'פּ (חדה)',d:`p' – פּ חדה ו„יבשה", בלי אוויר`,w:'პური',m:'לחם',e:'🍞',fam:'p'},
+{k:'ჟ',n:'ჟანი',h:'ז׳',d:'zh – כמו ז׳ ב„ז׳קט"',w:'ჟირაფი',m:"ג'ירפה",e:'🦒'},
+{k:'რ',n:'რაე',h:'ר',d:'r – ר׳ מתגלגלת בקצה הלשון',w:'რძე',m:'חלב',e:'🥛'},
+{k:'ს',n:'სანი',h:'ס',d:'s – כמו ס׳ ב„סוס"',w:'სახლი',m:'בית',e:'🏠'},
+{k:'ტ',n:'ტარი',h:'ט (חדה)',d:`t' – ט׳ חדה ו„יבשה", בלי אוויר`,w:'ტელეფონი',m:'טלפון',e:'📱',fam:'t'},
+{k:'უ',n:'უნი',h:'אוּ',d:'u – כמו „אוּ"',w:'ულვაში',m:'שפם',e:'🥸'},
+{k:'ფ',n:'ფარი',h:'פּ (רכה)',d:'p – פּ רגילה עם קצת אוויר (לא פ׳ רפויה!)',w:'ფეხი',m:'רגל',e:'🦶',fam:'p'},
+{k:'ქ',n:'ქანი',h:'כּ',d:'k – כּ רגילה עם קצת אוויר',w:'ქუდი',m:'כובע',e:'🎩',fam:'k'},
+{k:'ღ',n:'ღანი',h:'ר גרונית',d:'gh – כמו ר׳ ישראלית מהגרון, „רוֹן"',w:'ღრუბელი',m:'ענן',e:'☁️'},
+{k:'ყ',n:'ყარი',h:'ק גרונית',d:`q' – ק׳ עמוקה מסוף הגרון`,w:'ყვავილი',m:'פרח',e:'🌸',fam:'k'},
+{k:'შ',n:'შინი',h:'ש',d:'sh – כמו ש׳ ב„שמש"',w:'შოკოლადი',m:'שוקולד',e:'🍫'},
+{k:'ჩ',n:'ჩინი',h:'צ׳',d:'ch – כמו צ׳ ב„צ׳יפס"',w:'ჩიტი',m:'ציפור',e:'🐦',fam:'ch'},
+{k:'ც',n:'ცანი',h:'צ',d:'ts – כמו צ׳ ב„ציפור"',w:'ცხენი',m:'סוס',e:'🐴',fam:'ts'},
+{k:'ძ',n:'ძილი',h:'דז',d:'dz – ד׳ ו-ז׳ ביחד, „דז"',w:'ძაღლი',m:'כלב',e:'🐕'},
+{k:'წ',n:'წილი',h:'צ (חדה)',d:`ts' – צ׳ חדה ו„יבשה"`,w:'წყალი',m:'מים',e:'💧',fam:'ts'},
+{k:'ჭ',n:'ჭარი',h:'צ׳ (חדה)',d:`ch' – צ׳ חדה ו„יבשה"`,w:'ჭიანჭველა',m:'נמלה',e:'🐜',fam:'ch'},
+{k:'ხ',n:'ხანი',h:'ח',d:'kh – כמו ח׳ / כ׳ רפויה',w:'ხე',m:'עץ',e:'🌳'},
+{k:'ჯ',n:'ჯანი',h:'ג׳',d:'j – כמו ג׳ ב„ג׳ירפה"',w:'ჯადოქარი',m:'קוסם',e:'🧙'},
+{k:'ჰ',n:'ჰაე',h:'ה',d:'h – כמו ה׳ ב„הר"',w:'ჰიპოპოტამი',m:'היפופוטם',e:'🦛'},
+];
+const LGROUPS=[[0,7],[7,14],[14,21],[21,28],[28,33]];
+const WORDS=[
+// greetings
+['გამარჯობა','שלום','👋','g'],['მადლობა','תודה','🙏','g'],['დიახ','כן','✅','g'],['არა','לא','❌','g'],['ბოდიში','סליחה','🙇','g'],['ნახვამდის','להתראות','🚶','g'],
+// family
+['დედა','אמא','👩','f'],['მამა','אבא','👨','f'],['ბებია','סבתא','👵','f'],['ბაბუა','סבא','👴','f'],['ბავშვი','ילד','🧒','f'],['ძმა','אח','👦','f'],['და','אחות','👧','f'],['მეგობარი','חבר','🤝','f'],
+// food
+['პური','לחם','🍞','o'],['წყალი','מים','💧','o'],['რძე','חלב','🥛','o'],['ყველი','גבינה','🧀','o'],['ვაშლი','תפוח','🍎','o'],['ღვინო','יין','🍷','o'],['ყავა','קפה','☕','o'],['ჩაი','תה','🍵','o'],['ყურძენი','ענבים','🍇','o'],['ბანანი','בננה','🍌','o'],['შოკოლადი','שוקולד','🍫','o'],['ხაჭაპური','חצ׳אפורי','🥯','o'],
+// animals
+['ძაღლი','כלב','🐕','a'],['კატა','חתול','🐈','a'],['ცხენი','סוס','🐴','a'],['თევზი','דג','🐟','a'],['ჩიტი','ציפור','🐦','a'],['ლომი','אריה','🦁','a'],['ჟირაფი',"ג'ירפה",'🦒','a'],['სპილო','פיל','🐘','a'],
+// nature
+['მზე','שמש','☀️','n'],['მთვარე','ירח','🌙','n'],['ზღვა','ים','🌊','n'],['მთა','הר','⛰️','n'],['ხე','עץ','🌳','n'],['ყვავილი','פרח','🌸','n'],['თოვლი','שלג','❄️','n'],['წვიმა','גשם','🌧️','n'],
+// home & body
+['სახლი','בית','🏠','h'],['წიგნი','ספר','📖','h'],['მანქანა','מכונית','🚗','h'],['გული','לב','❤️','h'],['ხელი','יד','✋','h'],['ფეხი','רגל','🦶','h'],['თვალი','עין','👁️','h'],['ქუდი','כובע','🎩','h'],['ფული','כסף','💰','h'],
+].map(([ka,m,e,c])=>({ka,m,e,c}));
+const WCATS=[['all','הכל 🌈'],['g','ברכות 👋'],['f','משפחה 👨‍👩‍👧'],['o','אוכל 🍞'],['a','חיות 🐾'],['n','טבע 🌳'],['h','בית וגוף 🏠']];
+const SENTS=[
+['გამარჯობა, როგორ ხარ?','שלום, מה שלומך?','👋'],
+['კარგად, მადლობა.','טוב, תודה.','😊'],
+['რა გქვია?','איך קוראים לך?','❓'],
+['მე მქვია იასმინი.','קוראים לי יסמין.','🌼'],
+['დილა მშვიდობისა!','בוקר טוב!','🌅'],
+['ღამე მშვიდობისა!','לילה טוב!','🌙'],
+['მე ვარ ისრაელიდან.','אני מישראל.','🇮🇱'],
+['მიყვარხარ!','אני אוהבת אותך!','💕'],
+['მე მიყვარს ხაჭაპური.','אני אוהבת חצ׳אפורי.','🥯'],
+['სად არის ტუალეტი?','איפה השירותים?','🚻'],
+['ეს რა ღირს?','כמה זה עולה?','💰'],
+['ეს ძალიან გემრიელია!','זה ממש טעים!','😋'],
+['კატა სვამს რძეს.','החתול שותה חלב.','🐈'],
+['მზე ანათებს.','השמש זורחת.','☀️'],
+['ბოდიში, არ მესმის.','סליחה, אני לא מבינה.','🤷‍♀️'],
+['ერთი ყავა, თუ შეიძლება.','קפה אחד, בבקשה.','☕'],
+['გაუმარჯოს!','לחיים!','🥂'],
+['ნახვამდის!','להתראות!','👋'],
+].map(([ka,m,e])=>({ka,m,e}));
+const UNITS=['ნული','ერთი','ორი','სამი','ოთხი','ხუთი','ექვსი','შვიდი','რვა','ცხრა','ათი','თერთმეტი','თორმეტი','ცამეტი','თოთხმეტი','თხუთმეტი','თექვსმეტი','ჩვიდმეტი','თვრამეტი','ცხრამეტი'];
+const T20={1:'ოც',2:'ორმოც',3:'სამოც',4:'ოთხმოც'};
+function numWord(n){if(n===1000)return 'ათასი';if(n===100)return 'ასი';if(n<20)return UNITS[n];const q=Math.floor(n/20),r=n%20;return r?T20[q]+'და'+UNITS[r]:T20[q]+'ი'}
+function numBreak(n){if(n<=20||n===100)return '';const q=Math.floor(n/20),r=n%20;const b=q===1?'20':q+'×20';return r?b+' + '+r:b}
+const NUMCARDS=[0,1,2,3,4,5,6,7,8,9,10,11,12,15,20,21,30,40,50,60,80,100,1000];
+
+/* ===================== TRANSLITERATION ===================== */
+const LAT={'ა':'a','ბ':'b','გ':'g','დ':'d','ე':'e','ვ':'v','ზ':'z','თ':'t','ი':'i','კ':"k'",'ლ':'l','მ':'m','ნ':'n','ო':'o','პ':"p'",'ჟ':'zh','რ':'r','ს':'s','ტ':"t'",'უ':'u','ფ':'p','ქ':'k','ღ':'gh','ყ':"q'",'შ':'sh','ჩ':'ch','ც':'ts','ძ':'dz','წ':"ts'",'ჭ':"ch'",'ხ':'kh','ჯ':'j','ჰ':'h'};
+const HEC={'ბ':'ב','გ':'ג','დ':'ד','ვ':'וו','ზ':'ז','თ':'ת','კ':'ק','ლ':'ל','მ':'מ','ნ':'נ','პ':'פ','ჟ':"ז'",'რ':'ר','ს':'ס','ტ':'ט','ფ':'פ','ქ':'כ','ღ':'ר','ყ':'ק','შ':'ש','ჩ':"צ'",'ც':'צ','ძ':'דז','წ':'צ','ჭ':"צ'",'ხ':'ח','ჯ':"ג'",'ჰ':'ה'};
+const VOW='აეიოუ';
+const isKa=c=>c>='ა'&&c<='ჰ';
+function lat(s){return [...s].map(c=>LAT[c]??c).join('')}
+function heb(s){ // simple Hebrew phonetic spelling
+ return s.split(/([^ა-ჰ]+)/).map(w=>{
+  if(!w||!isKa(w[0]))return w;
+  const ch=[...w];let o='';
+  ch.forEach((c,i)=>{
+   const start=i===0||VOW.includes(ch[i-1]),end=i===ch.length-1;
+   if(c==='ა'||c==='ე')o+=start?(end&&i>0?'אה':'א'):(end?'ה':'');
+   else if(c==='ი')o+=start?'אי':'י';
+   else if(c==='ო'||c==='უ')o+=start?'או':'ו';
+   else o+=HEC[c]||c;
+  });
+  const fin={'מ':'ם','נ':'ן','צ':'ץ','פ':'ף','כ':'ך'};
+  const last=o.slice(-1);if(fin[last]&&!/'$/.test(o))o=o.slice(0,-1)+fin[last];
+  return o;
+ }).join('');
+}
+function letterSpans(s){return [...s].map(c=>isKa(c)?`<span onclick="peek(event,'${c}')">${c}</span>`:c).join('')}
+function peek(ev,c){ev.stopPropagation();const L=LETTERS.find(x=>x.k===c);if(L){toast(`<span class="ka">${c}</span> = ${L.h} · <span dir="ltr">${LAT[c]}</span>`);speak(c)}
+ const t=ev.target;t.classList.add('hl');setTimeout(()=>t.classList.remove('hl'),900)}
+
+/* ===================== STATE ===================== */
+const KEY='ka-yasmin-v1';
+let S={xp:0,seen:[],streak:0,last:'',best:{}};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+(function daily(){const d=new Date().toDateString();if(S.last!==d){const y=new Date(Date.now()-864e5).toDateString();S.streak=S.last===y?S.streak+1:1;S.last=d;save()}})();
+const LEVELS=['מתחילה 🌱','מכירה אותיות 🔤','קוראת מילים 📖','מדברת קצת 🗣️','חובבת גאורגית 🍇','קוראת שוטפת 🚀','גאורגית אמיתית 🇬🇪','אלופת טביליסי 👑'];
+function addXP(n){S.xp+=n;save();refreshTop()}
+function refreshTop(){
+ $('#xpPill').textContent='⭐ '+S.xp;$('#streakPill').textContent='🔥 '+S.streak;
+ const per=200,lv=Math.min(LEVELS.length-1,Math.floor(S.xp/per));
+ $('#lvlName').textContent='רמה '+(lv+1)+': '+LEVELS[lv];
+ const inLv=lv===LEVELS.length-1?per:S.xp%per;
+ $('#lvlBar').style.width=(inLv/per*100)+'%';
+ $('#lvlNext').textContent=lv===LEVELS.length-1?'הגעת לפסגה!':`עוד ${per-inLv} ⭐ לרמה הבאה`;
+ $('#seenCnt').textContent=S.seen.length+'/33 נלמדו';
+}
+
+/* ===================== HELPERS ===================== */
+function $(q){return document.querySelector(q)}
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=(a,n)=>shuffle(a).slice(0,n);
+let toastT;function toast(t){const e=$('#toast');e.innerHTML=t;e.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove('on'),1500)}
+const PRAISE=['מעולה! 🎉','כל הכבוד! 🌟','יופי! 💜','אלופה! 🏆','ბრავო! 👏','מדהים! ✨','კარგია! 👍'];
+const OOPS=['כמעט! 💪','לא נורא, ננסה שוב 🙂','עוד קצת תרגול 🌱'];
+let curScreen='home';
+function show(id,title){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$('#s-'+id).classList.add('on');curScreen=id;
+ $('#hTitle').innerHTML=title||'<span class="ka">ქართული</span> 🇬🇪';$('#backBtn').style.visibility=id==='home'?'hidden':'visible';$('#main').scrollTop=0;
+ if(document.activeElement)document.activeElement.blur()}
+function goHome(){stopTimers();closeSheet();refreshTop();show('home')}
+let timers=[];function later(f,ms){timers.push(setTimeout(f,ms))}function stopTimers(){timers.forEach(clearTimeout);timers=[]}
+
+/* ---------- speech (only if a Georgian voice exists on the device) ---------- */
+let kaVoice=null;
+function loadVoices(){try{const v=speechSynthesis.getVoices();kaVoice=v.find(x=>/^ka/i.test(x.lang))||null;document.body.classList.toggle('tts',!!kaVoice)}catch(e){}}
+if('speechSynthesis' in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+function speak(t){if(!kaVoice)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.voice=kaVoice;u.lang=kaVoice.lang;u.rate=.8;speechSynthesis.speak(u)}catch(e){}}
+
+/* ---------- sounds ---------- */
+let AC;function beep(ok){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime;
+ (ok?[523,659,784]:[220,180]).forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.type=ok?'triangle':'sawtooth';o.frequency.value=f;
+ g.gain.setValueAtTime(.0001,t+i*.09);g.gain.exponentialRampToValueAtTime(ok?.18:.08,t+i*.09+.02);g.gain.exponentialRampToValueAtTime(.0001,t+i*.09+.22);
+ o.connect(g).connect(AC.destination);o.start(t+i*.09);o.stop(t+i*.09+.25)})}catch(e){}}
+
+/* ---------- confetti ---------- */
+const fx=$('#fx'),fc=fx.getContext('2d');let parts=[],fxOn=false;
+function sizeFx(){fx.width=innerWidth*devicePixelRatio;fx.height=innerHeight*devicePixelRatio;fx.style.width=innerWidth+'px';fx.style.height=innerHeight+'px'}
+sizeFx();addEventListener('resize',sizeFx);
+function confetti(n=120){const C=['#f97316','#ec4899','#8b5cf6','#22c55e','#facc15','#06b6d4','#ef4444'];
+ for(let i=0;i<n;i++)parts.push({x:Math.random()*innerWidth,y:-20-Math.random()*innerHeight*.4,vx:(Math.random()-.5)*3,vy:2+Math.random()*3,r:Math.random()*6.28,vr:(Math.random()-.5)*.3,s:6+Math.random()*7,c:C[i%C.length]});
+ if(!fxOn){fxOn=true;requestAnimationFrame(fxLoop)}}
+function fxLoop(){const d=devicePixelRatio;fc.setTransform(d,0,0,d,0,0);fc.clearRect(0,0,innerWidth,innerHeight);
+ parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.04;p.r+=p.vr;fc.save();fc.translate(p.x,p.y);fc.rotate(p.r);fc.fillStyle=p.c;fc.fillRect(-p.s/2,-p.s/3,p.s,p.s*.66);fc.restore()});
+ parts=parts.filter(p=>p.y<innerHeight+30);if(parts.length)requestAnimationFrame(fxLoop);else{fxOn=false;fc.clearRect(0,0,innerWidth,innerHeight)}}
+
+/* ===================== LEARN: LETTERS ===================== */
+let lgSel=-1;
+function openLetters(){show('letters','🔤 האלפבית הגאורגי');renderLetters()}
+function renderLetters(){
+ $('#lgChips').innerHTML=[['-1','כל 33 האותיות']].concat(LGROUPS.map((g,i)=>[i,'קבוצה '+(i+1)])).map(([v,t])=>`<button class="chip ${lgSel==v?'on':''}" onclick="lgSel=${v};renderLetters()">${t}</button>`).join('');
+ const list=lgSel<0?LETTERS:LETTERS.slice(...LGROUPS[lgSel]);
+ $('#lgrid').innerHTML=list.map(L=>`<button class="lt ${S.seen.includes(L.k)?'seen':''}" onclick="letterCard(${LETTERS.indexOf(L)})"><span class="ka">${L.k}</span><small>${L.h.split(' ')[0]}</small></button>`).join('');
+}
+function letterCard(i){
+ const L=LETTERS[i];
+ if(!S.seen.includes(L.k)){S.seen.push(L.k);addXP(2);save()}
+ $('#sheetIn').innerHTML=`
+  <div class="row" style="justify-content:space-between"><button class="btn s" onclick="letterCard(${(i+32)%33})">→ הקודמת</button><span class="tag" dir="ltr">${i+1} / 33</span><button class="btn s" onclick="letterCard(${(i+1)%33})">הבאה ←</button></div>
+  <div class="bigL ka">${L.k}</div>
+  <div class="row"><span class="tag">צליל: ${L.h}</span><span class="tag o" dir="ltr">${LAT[L.k]}</span><span class="tag g">שם האות: <span class="ka">${L.n}</span></span><button class="say" onclick="speak('${L.k}')">🔊</button></div>
+  <p style="text-align:center;margin-top:10px;font-size:16px">${L.d}</p>
+  ${L.fam?`<p class="hint" style="margin-top:6px">⚠️ שימי לב: יש לה „אחות" עם צליל דומה – ${LETTERS.filter(x=>x.fam===L.fam&&x.k!==L.k).map(x=>`<b class="ka">${x.k}</b> (${x.h})`).join(', ')}</p>`:''}
+  <div class="exw"><div class="em">${L.e}</div><div class="ka letters" style="font-size:34px;font-weight:800">${letterSpans(L.w).replaceAll('>'+L.k+'<',' style="color:#db2777">'+L.k+'<')}</div>
+   <div class="tr">${lat(L.w)} · ${heb(L.w)}</div><div class="he">${L.m}</div></div>
+  <canvas class="trace" id="trace" width="260" height="220"></canvas>
+  <div class="hint">✍️ עקבי עם האצבע על האות כדי לתרגל כתיבה</div>
+  <div class="row" style="margin-top:10px"><button class="btn s" onclick="drawTrace('${L.k}')">🧽 נקה</button><button class="btn" onclick="closeSheet();renderLetters()">סיימתי ✓</button></div>`;
+ $('#sheet').classList.add('on');$('#sheetIn').scrollTop=0;drawTrace(L.k);refreshTop();
+}
+function closeSheet(){$('#sheet').classList.remove('on')}
+function drawTrace(ch){
+ const c=$('#trace');if(!c)return;const d=devicePixelRatio||1,W=260,H=220;c.width=W*d;c.height=H*d;c.style.width=W+'px';c.style.height=H+'px';
+ const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);x.clearRect(0,0,W,H);
+ x.fillStyle='#ede9fe';x.font='bold 170px "Noto Sans Georgian","DejaVu Sans",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(ch,W/2,H/2+6);
+ x.lineWidth=12;x.lineCap='round';x.lineJoin='round';let down=false,hue=0;
+ const pos=e=>{const r=c.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]};
+ c.onpointerdown=e=>{down=true;c.setPointerCapture(e.pointerId);const[a,b]=pos(e);x.beginPath();x.moveTo(a,b)};
+ c.onpointermove=e=>{if(!down)return;const[a,b]=pos(e);hue=(hue+4)%360;x.strokeStyle=`hsl(${hue},85%,55%)`;x.lineTo(a,b);x.stroke();x.beginPath();x.moveTo(a,b)};
+ c.onpointerup=c.onpointercancel=()=>down=false;
+}
+
+/* ===================== LEARN: WORDS ===================== */
+let wcSel='all';
+function openWords(){show('words','📖 מילים');renderWords()}
+function renderWords(){
+ $('#wcChips').innerHTML=WCATS.map(([v,t])=>`<button class="chip ${wcSel===v?'on':''}" onclick="wcSel='${v}';renderWords()">${t}</button>`).join('');
+ const list=WORDS.filter(w=>wcSel==='all'||w.c===wcSel);
+ $('#wlist').innerHTML=list.map(w=>`<div class="wc" onclick="this.classList.toggle('f')"><div class="in">
+  <div class="fa"><div class="ka letters">${letterSpans(w.ka)}</div><div class="hint" style="margin-top:6px">לחצי להפוך 🔄</div></div>
+  <div class="ba"><div class="em">${w.e}</div><div class="he">${w.m}</div><div class="tr">${heb(w.ka)} · ${lat(w.ka)}</div></div></div></div>`).join('');
+}
+
+/* ===================== LEARN: SENTENCES ===================== */
+function openSentences(){show('sent','💬 משפטים');
+ $('#slist').innerHTML=SENTS.map((s,i)=>`<div class="sr" onclick="this.classList.toggle('f')"><span class="ka letters">${letterSpans(s.ka)}</span>
+  <div class="more"><div class="he">${s.e} ${s.m}</div><div class="tr" style="text-align:right">${heb(s.ka)}</div><div class="tr" style="text-align:right">${lat(s.ka)}</div><button class="say" onclick="event.stopPropagation();speak(SENTS[${i}].ka)">🔊</button></div></div>`).join('');
+}
+
+/* ===================== LEARN: NUMBERS ===================== */
+let nCur=7;
+function openNumbers(){show('nums','🔢 מספרים');numExplore(nCur);
+ $('#ngrid').innerHTML=NUMCARDS.map(n=>`<div class="nc"><div class="d">${n}</div><div class="ka">${numWord(n)}</div><div class="tr">${heb(numWord(n))}</div></div>`).join('')}
+function numExplore(n){nCur=n;$('#nxR').value=n;$('#nxD').textContent=n;const w=numWord(n);$('#nxK').textContent=w;$('#nxT').textContent=heb(w)+' · '+lat(w);
+ const b=numBreak(n);$('#nxB').textContent=b?'🧮 '+b:'✨ מילה בסיסית';}
+function nStep(d){numExplore(Math.max(0,Math.min(100,nCur+d)))}
+
+/* ===================== TIPS ===================== */
+function openTips(){show('tips','💡 טיפים');$('#tipsIn').innerHTML=`
+ <div class="card" style="line-height:1.7;font-size:16px">
+ <p>🇬🇪 <b>הכתב הגאורגי נקרא „מחדרולי"</b> (<span class="ka">მხედრული</span>). יש בו 33 אותיות.</p>
+ <p>➡️ כותבים <b>משמאל לימין</b>, כמו באנגלית.</p>
+ <p>🔠 <b>אין אותיות גדולות וקטנות</b> – כל אות נראית תמיד אותו דבר. 🎉</p>
+ <p>🗣️ <b>קוראים בדיוק כמו שכתוב!</b> כל אות = צליל אחד. אין אותיות שקטות ואין ניקוד – גם התנועות (א, אֶ, אִי, אוֹ, אוּ) הן אותיות רגילות.</p>
+ <p>🎯 <b>אותיות „חדות"</b>: <span class="ka">კ პ ტ წ ჭ ყ</span> נאמרות בלי אוויר, בצליל „יבש ונקישתי". האחיות שלהן <span class="ka">ქ ფ თ ც ჩ</span> נאמרות עם קצת אוויר.</p>
+ <p>🌀 <b>הרבה עיצורים ברצף</b> – כמו <span class="ka">მწვრთნელი</span> (מאמן). לא להיבהל, פשוט לקרוא אות אחרי אות!</p>
+ <p>🔊 <b>הדגשה</b> כמעט תמיד על ההברה הראשונה.</p>
+ <p>👆 <b>בכל מקום באפליקציה</b> אפשר ללחוץ על אות גאורגית כדי לראות איזה צליל היא.</p>
+ <p>🔊 אם בטלפון מותקן קול גאורגי, יופיעו כפתורי השמעה. בהגדרות הטלפון (נגישות ← הקראה) אפשר לחפש קול „Georgian".</p>
+ </div>`}
+
+/* ===================== QUIZ ENGINE ===================== */
+// question: {prompt, label, options:[{html,correct,cls}], explain}
+let Q=null;
+function runQuiz(title,key,questions){
+ Q={title,key,qs:questions,i:0,score:0,right:0,combo:0,maxCombo:0,t0:0,lock:false};
+ show('quiz',title);renderQ();
+}
+function renderQ(){
+ const q=Q.qs[Q.i];Q.lock=false;Q.t0=Date.now();
+ $('#quizIn').innerHTML=`<div class="qtop"><span class="pill" dir="ltr">${Q.i+1}/${Q.qs.length}</span><div class="prog"><i style="width:${Q.i/Q.qs.length*100}%"></i></div><span class="combo">${Q.combo>1?'🔥x'+Q.combo:''}</span><span class="pill">🏅 ${Q.score}</span></div>
+ <div class="qbox"><div class="qlbl">${q.label}</div>${q.prompt}</div>
+ <div class="opts">${q.options.map((o,j)=>`<button class="opt ${o.cls||''}" onclick="answer(${j},this)">${o.html}</button>`).join('')}</div>
+ <div class="explain" id="explain"></div>`;
+ if(document.activeElement)document.activeElement.blur();
+}
+function answer(j,btn){
+ if(Q.lock)return;Q.lock=true;btn.blur();
+ const q=Q.qs[Q.i],ok=q.options[j].correct,btns=[...document.querySelectorAll('.opt')];
+ btns.forEach((b,k)=>{if(q.options[k].correct)b.classList.add('ok');else if(k===j)b.classList.add('no');else b.classList.add('dim')});
+ if(ok){const dt=(Date.now()-Q.t0)/1000,speed=Math.max(0,Math.round(6-dt));Q.combo++;Q.maxCombo=Math.max(Q.maxCombo,Q.combo);
+  const pts=10+speed+(Q.combo>2?5:0);Q.score+=pts;Q.right++;beep(1);toast(PRAISE[Math.random()*PRAISE.length|0]+' +'+pts+(speed>2?' ⚡':''));if(Q.combo%5===0)confetti(50)}
+ else{Q.combo=0;beep(0);toast(OOPS[Math.random()*OOPS.length|0])}
+ $('#explain').innerHTML=q.explain||'';
+ later(()=>{Q.i++;if(Q.i<Q.qs.length)renderQ();else endGame(Q.title,Q.key,Q.score,Q.right,Q.qs.length,Q.maxCombo,()=>Q.again())},ok?1300:2300);
+}
+function endGame(title,key,score,right,total,maxCombo,again){
+ const pct=right/total,stars=pct>=.9?3:pct>=.6?2:pct>=.3?1:0;
+ const best=S.best[key]||0,nb=score>best;if(nb){S.best[key]=score}
+ addXP(Math.round(score/2));
+ const scr=curScreen;
+ $('#'+(scr==='quiz'?'quizIn':scr==='build'?'buildIn':'memIn')).innerHTML=`<div class="card end">
+  <h2>${stars===3?'מושלם! 👑':stars===2?'כל הכבוד! 🌟':stars===1?'יפה מאוד! 💪':'ממשיכים להתאמן! 🌱'}</h2>
+  <div class="stars">${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}</div>
+  <div class="sc">${score}</div><div class="qlbl">נקודות · ${right}/${total} נכונות${maxCombo>2?' · רצף שיא 🔥'+maxCombo:''}</div>
+  ${nb?'<div class="tag o" style="display:inline-block;margin-top:10px">🏆 שיא חדש!</div>':`<div class="hint" style="margin-top:8px">השיא שלך: ${best}</div>`}
+  <div class="hint" style="margin-top:6px">+${Math.round(score/2)} ⭐ לרמה שלך</div>
+  <div class="row" style="margin-top:16px"><button class="btn gr" id="againBtn">🔁 שוב</button><button class="btn s" onclick="goHome()">🏠 לתפריט</button></div></div>`;
+ $('#againBtn').onclick=again;
+ if(stars>=2)confetti(stars===3?200:100);
+}
+
+/* ---------- letter quiz ---------- */
+function pickGroup(kind){
+ show('pick','🎯 חידון אותיות');
+ $('#pickIn').innerHTML=`<div class="card"><div class="qlbl" style="text-align:center;margin-bottom:12px">על אילו אותיות להתאמן?</div>
+ <div class="sl">${LGROUPS.map((g,i)=>`<button class="sr" onclick="startLetterQuiz(${i})"><b>קבוצה ${i+1}</b> <span class="ka" style="display:inline;font-size:22px">${LETTERS.slice(...g).map(x=>x.k).join(' ')}</span></button>`).join('')}
+ <button class="sr" style="background:linear-gradient(135deg,#fde68a,#fbcfe8)" onclick="startLetterQuiz(-1)"><b>🌈 כל האותיות</b></button></div></div>`;
+}
+function letterQs(pool,n){
+ return pick(pool,Math.min(n,pool.length)).concat(pool.length<n?pick(pool,n-pool.length):[]).map((L,i)=>{
+  const others=shuffle(LETTERS.filter(x=>x!==L&&(!L.fam||x.fam!==L.fam))).filter((x,i,a)=>a.findIndex(y=>y.h===x.h)===i).slice(0,3);
+  const all=shuffle([L,...others]);
+  const explain=`<span class="ka" style="font-size:22px">${L.k}</span> = ${L.h} · כמו ב<span class="ka">${L.w}</span> ${L.e}`;
+  if(i%2===0)return{label:'איזה צליל עושה האות?',prompt:`<div class="q1 ka">${L.k}</div>`,options:all.map(x=>({html:x.h,correct:x===L})),explain};
+  return{label:'איזו אות עושה את הצליל?',prompt:`<div class="q2">${L.h}</div><div class="hint">כמו ב: ${L.e} ${L.m}</div>`,options:all.map(x=>({html:`<span class="ka">${x.k}</span>`,correct:x===L,cls:'big'})),explain};
+ });
+}
+function startLetterQuiz(g){const pool=g<0?LETTERS:LETTERS.slice(...LGROUPS[g]);
+ const go=()=>runQuiz('🎯 חידון אותיות','lq'+g,letterQs(pool,10));go();Q.again=go}
+
+/* ---------- word quiz ---------- */
+function wordQs(n){return pick(WORDS,n).map((w,i)=>{
+ const all=shuffle([w,...pick(WORDS.filter(x=>x!==w),3)]);
+ const explain=`<span class="ka">${w.ka}</span> = ${w.e} ${w.m} · <span class="tr">${heb(w.ka)}</span>`;
+ if(i%3!==2)return{label:'קראי את המילה – מה היא אומרת? (לחצי על אות לרמז)',prompt:`<div class="q3 ka letters">${letterSpans(w.ka)}</div>`,options:all.map(x=>({html:`<span style="font-size:30px">${x.e}</span><span style="font-size:16px">${x.m}</span>`,correct:x===w})),explain};
+ return{label:'איזו מילה מתאימה לתמונה?',prompt:`<div style="font-size:70px">${w.e}</div><div class="he">${w.m}</div>`,options:all.map(x=>({html:`<span class="ka">${x.ka}</span>`,correct:x===w})),explain};
+})}
+function startWordQuiz(){const go=()=>runQuiz('👀 קריאת מילים','wq',wordQs(10));go();Q.again=go}
+
+/* ---------- number quiz ---------- */
+function numQs(n){const pool=[...Array(21).keys(),30,40,50,60,80,100];
+ return pick(pool,n).map((v,i)=>{
+  const others=pick(pool.filter(x=>x!==v),3),all=shuffle([v,...others]);
+  const explain=`${v} = <span class="ka">${numWord(v)}</span> · <span class="tr">${heb(numWord(v))}</span>${numBreak(v)?' · 🧮 '+numBreak(v):''}`;
+  if(i%2===0)return{label:'איך אומרים בגאורגית?',prompt:`<div class="q1">${v}</div>`,options:all.map(x=>({html:`<span class="ka" style="font-size:20px">${numWord(x)}</span>`,correct:x===v})),explain};
+  return{label:'איזה מספר כתוב כאן?',prompt:`<div class="q3 ka letters">${letterSpans(numWord(v))}</div>`,options:all.map(x=>({html:`<span style="font-size:32px">${x}</span>`,correct:x===v})),explain};
+ })}
+function startNumQuiz(){const go=()=>runQuiz('🧮 חידון מספרים','nq',numQs(10));go();Q.again=go}
+
+/* ---------- mega challenge ---------- */
+function startMega(){const go=()=>runQuiz('🏆 אתגר מעורב','mega',shuffle([...letterQs(LETTERS,5),...wordQs(6),...numQs(4)]));go();Q.again=go}
+
+/* ===================== BUILD WORD ===================== */
+let B=null;
+function startBuild(){
+ const pool=WORDS.filter(w=>[...w.ka].length<=8);
+ B={mode:'w',items:pick(pool,8),i:0,score:0,right:0,combo:0,maxCombo:0};show('build','🧩 בני מילה');renderBuild()}
+function startSentBuild(){
+ const pool=SENTS.filter(s=>s.ka.split(' ').length>=2);
+ B={mode:'s',items:pick(pool,6),i:0,score:0,right:0,combo:0,maxCombo:0};show('build','🧱 בני משפט');renderBuild()}
+function renderBuild(){
+ const it=B.items[B.i];B.mist=0;B.hints=0;
+ B.target=B.mode==='w'?[...it.ka]:it.ka.split(' ');
+ let bank=[...B.target];
+ if(B.mode==='w'){const extra=pick(LETTERS.map(l=>l.k).filter(k=>!B.target.includes(k)),3);bank=bank.concat(extra)}
+ B.bank=shuffle(bank).map((t,j)=>({t,j,used:false}));B.fill=[];
+ $('#buildIn').innerHTML=`<div class="qtop"><span class="pill" dir="ltr">${B.i+1}/${B.items.length}</span><div class="prog"><i style="width:${B.i/B.items.length*100}%"></i></div><span class="pill">🏅 ${B.score}</span></div>
+ <div class="qbox"><div style="font-size:60px">${it.e}</div><div class="he" style="font-size:22px">${it.m}</div>
+  <div class="tr" id="bHint" style="font-size:16px;margin-top:4px">${B.mode==='w'?'🗣️ '+heb(it.ka):''}</div></div>
+ <div class="slots" id="slots"></div><div class="bank" id="bank"></div>
+ <div class="row" style="margin-top:14px"><button class="btn s" onclick="bUndo()">↩️ מחק</button><button class="btn s" onclick="bHint()">💡 רמז</button></div>
+ <div class="explain" id="bEx"></div>`;
+ drawBuild();
+}
+function drawBuild(){
+ const isS=B.mode==='s';
+ $('#slots').innerHTML=B.target.map((t,k)=>`<div class="slot ka ${B.fill[k]!=null?'full':''}" style="${isS?'font-size:20px;min-width:60px':''}">${B.fill[k]!=null?B.bank[B.fill[k]].t:''}</div>`).join('');
+ $('#bank').innerHTML=B.bank.map((b,k)=>`<button class="key ka ${isS?'wordtile':''} ${b.used?'used':''}" onclick="bTap(${k})">${b.t}</button>`).join('');
+}
+function bTap(k){
+ const b=B.bank[k];if(b.used||B.fill.length>=B.target.length)return;
+ const pos=B.fill.length;
+ if(b.t!==B.target[pos]){B.mist++;B.combo=0;beep(0);const el=document.querySelectorAll('.key')[k];el.classList.add('no');el.style.animation='shake .4s';setTimeout(()=>{el.style.animation='';el.classList.remove('no')},400);
+  if(B.mode==='w'){const L=LETTERS.find(x=>x.k===b.t);toast(`${b.t} = ${L?L.h:''} – לא מתאים כאן`)}else toast('לא המילה הזאת 🙂');return}
+ b.used=true;B.fill.push(k);if(B.mode==='w')speak(b.t);drawBuild();
+ if(B.fill.length===B.target.length)bDone();
+}
+function bUndo(){/* only allows removing last tile (all placed tiles are correct) */const k=B.fill.pop();if(k!=null){B.bank[k].used=false;drawBuild()}}
+function bHint(){if(B.fill.length>=B.target.length)return;B.hints++;const need=B.target[B.fill.length];const k=B.bank.findIndex(b=>!b.used&&b.t===need);if(k>=0){
+ const el=document.querySelectorAll('.key')[k];el.style.boxShadow='0 0 0 4px #facc15,0 5px 0 #f9a8d4';
+ if(B.mode==='w'){const L=LETTERS.find(x=>x.k===need);toast(`הבאה: ${L?L.h:need}`)}else toast('המילה הבאה מוארת 💡')}}
+function bDone(){
+ const it=B.items[B.i];document.querySelectorAll('.slot').forEach(s=>s.classList.add('ok'));
+ const pts=Math.max(4,(B.mode==='w'?15:20)-B.mist*3-B.hints*3);B.score+=pts;
+ if(!B.mist&&!B.hints){B.right++;B.combo++;B.maxCombo=Math.max(B.maxCombo,B.combo)}
+ beep(1);toast(PRAISE[Math.random()*PRAISE.length|0]+' +'+pts);speak(it.ka);
+ $('#bEx').innerHTML=`<span class="ka">${it.ka}</span> · <span class="tr">${heb(it.ka)} · ${lat(it.ka)}</span>`;
+ later(()=>{B.i++;if(B.i<B.items.length)renderBuild();else{const m=B.mode;endGame(m==='w'?'🧩 בני מילה':'🧱 בני משפט',m==='w'?'bw':'bs',B.score,B.right,B.items.length,B.maxCombo,m==='w'?startBuild:startSentBuild)}},1800);
+}
+
+/* ===================== MEMORY ===================== */
+let M=null;
+function pickMemory(){show('pick','🃏 משחק זיכרון');
+ $('#pickIn').innerHTML=`<div class="card"><div class="qlbl" style="text-align:center;margin-bottom:12px">מה נתאים?</div><div class="sl">
+ <button class="sr" onclick="startMem('l')"><b>🔤 אות ↔ צליל</b><div class="hint" style="text-align:right">התאימי כל אות גאורגית לצליל שלה</div></button>
+ <button class="sr" onclick="startMem('w')"><b>📖 מילה ↔ תמונה</b><div class="hint" style="text-align:right">קראי את המילה ומצאי את התמונה</div></button>
+ <button class="sr" onclick="startMem('n')"><b>🔢 מספר ↔ מילה</b><div class="hint" style="text-align:right">התאימי ספרה למילה הגאורגית</div></button></div></div>`}
+function startMem(kind){
+ let pairs;
+ if(kind==='l')pairs=pick(LETTERS.filter((x,i,a)=>a.findIndex(y=>y.h===x.h)===i),6).map(L=>[`<span class="ka">${L.k}</span>`,`<span style="font-size:22px">${L.h}</span>`]);
+ else if(kind==='w')pairs=pick(WORDS.filter(w=>[...w.ka].length<=6),6).map(w=>[`<span class="ka" style="font-size:22px">${w.ka}</span>`,`<span style="font-size:40px">${w.e}</span>`]);
+ else pairs=pick([...Array(13).keys(),20,30,40,100],6).map(n=>[`<span class="ka" style="font-size:${numWord(n).length>6?16:20}px">${numWord(n)}</span>`,`<span style="font-size:40px;color:#7c3aed">${n}</span>`]);
+ const cards=shuffle(pairs.flatMap((p,i)=>[{id:i,html:p[0]},{id:i,html:p[1]}]));
+ M={kind,cards,open:[],done:0,moves:0,t0:Date.now(),lock:false};show('mem','🃏 משחק זיכרון');
+ $('#memIn').innerHTML=`<div class="qtop"><span class="pill" id="mMoves">🔄 0</span><span class="pill" id="mDone">✅ 0/6</span></div>
+ <div class="mgrid">${cards.map((c,k)=>`<div class="mc" onclick="mFlip(${k},this)"><div class="in"><div class="fa">🇬🇪</div><div class="ba">${c.html}</div></div></div>`).join('')}</div>
+ <div class="hint" style="margin-top:12px">הפכי שני כרטיסים ומצאי זוג מתאים</div>`;
+}
+function mFlip(k,el){
+ if(M.lock||el.classList.contains('f')||el.classList.contains('done'))return;
+ el.classList.add('f');M.open.push([k,el]);
+ if(M.open.length===2){M.moves++;$('#mMoves').textContent='🔄 '+M.moves;const[[a,ea],[b,eb]]=M.open;M.lock=true;
+  if(M.cards[a].id===M.cards[b].id){later(()=>{ea.classList.add('done');eb.classList.add('done');M.open=[];M.lock=false;M.done++;beep(1);toast(PRAISE[Math.random()*PRAISE.length|0]);
+   $('#mDone').textContent='✅ '+M.done+'/6';if(M.done===6){const sc=Math.max(20,120-(M.moves-6)*6);later(()=>endGame('🃏 משחק זיכרון','mem'+M.kind,sc,Math.max(0,6-Math.max(0,M.moves-9)),6,0,()=>startMem(M.kind)),700)}},450)}
+  else later(()=>{ea.classList.remove('f');eb.classList.remove('f');M.open=[];M.lock=false},1000)}
+}
+
+/* ===================== INIT ===================== */
+refreshTop();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+if('serviceWorker' in navigator&&location.protocol.startsWith('http')){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script>
+</body>
+</html>
